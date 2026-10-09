@@ -1,5 +1,6 @@
 import { toggle, watchlist } from './state.js';
 import { openDetails } from './details.js';
+import { readFilters } from './filters.js';
 
 /**
  * C2. Підключає кнопки карток у списку #results: «До списку» додає серіал до мого списку або
@@ -26,10 +27,28 @@ export function initList(refresh) {
     if (!Number.isInteger(id)) throw new TypeError(`Некоректний id серіалу: ${card.dataset.id}`);
 
     if (button.dataset.action === 'toggle') {
+      const wasListed = watchlist.has(id);
+      const cardIndex = [...results.children].indexOf(card);
+      const { mine } = readFilters();
       toggle(id);
       count.textContent = String(watchlist.size);
       refresh();
-      results.querySelector(`[data-id="${id}"] [data-action="toggle"]`)?.focus();
+      if (mine && wasListed) {
+        const cards = [...results.children];
+        const nextCard = cards[Math.min(cardIndex, cards.length - 1)];
+        const nextButton = nextCard?.querySelector('[data-action="toggle"]');
+        if (nextButton instanceof HTMLButtonElement) {
+          nextButton.focus();
+        } else {
+          const heading = document.querySelector('#results-heading');
+          if (!(heading instanceof HTMLElement)) {
+            throw new TypeError('Не знайдено заголовок #results-heading');
+          }
+          heading.focus();
+        }
+      } else {
+        results.querySelector(`[data-id="${id}"] [data-action="toggle"]`)?.focus();
+      }
     } else if (button.dataset.action === 'details') {
       openDetails(id);
     }
