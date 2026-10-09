@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Експерименти — ЛР-9</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: system-ui, sans-serif;
+        line-height: 1.5;
+      }
+      body {
+        max-width: 48rem;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      section {
+        margin-block: 1rem;
+        padding: 0.75rem 1rem;
+        border: 1px solid;
+        border-radius: 0.5rem;
+      }
+      h2 {
+        margin: 0 0 0.5rem;
+        font-size: 1rem;
+      }
+      .fake {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        border: 1px solid;
+        border-radius: 0.4rem;
+        cursor: pointer;
+      }
+      button svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Експерименти ЛР-9</h1>
+    <p>
+      Фрагменти коду — у §4 лабораторної роботи. Номер і назва кожного блоку нижче збігаються з
+      номером і назвою експерименту. Вставляйте фрагменти в Console (DevTools) на цій сторінці
+      цілими. Перед кожним експериментом оновлюйте сторінку: фрагменти змінюють DOM. Для
+      експериментів 13–15 додайте в Console <em>Live Expression</em>
+      <code>document.activeElement</code>.
+    </p>
+
+    <section id="exp-1">
+      <h2>1 · Live і static колекції</h2>
+      <ul>
+        <li class="item">Перший</li>
+        <li class="item">Другий</li>
+        <li class="item">Третій</li>
+        <li class="item">Четвертий</li>
+        <li class="item">П'ятий</li>
+        <li class="item">Шостий</li>
+      </ul>
+    </section>
+
+    <section id="exp-2">
+      <h2>2 · Рядок із HTML чотирма способами</h2>
+      <p>textContent: <output class="as-text"></output></p>
+      <p>innerHTML: <output class="as-html"></output></p>
+    </section>
+
+    <section id="exp-3">
+      <h2>3 · Значення з dataset</h2>
+      <ul>
+        <li data-id="82">Game of Thrones</li>
+      </ul>
+    </section>
+
+    <section id="exp-4">
+      <h2>4 · innerHTML += і обробники</h2>
+      <button type="button">Кнопка з обробником</button>
+    </section>
+
+    <section id="exp-5">
+      <h2>5 · Фази поширення події</h2>
+      <ul>
+        <li><button type="button">Клікніть мене</button></li>
+      </ul>
+    </section>
+
+    <section id="exp-6">
+      <h2>6 · target, currentTarget і this</h2>
+      <button type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="currentColor" />
+        </svg>
+        Кнопка з іконкою
+      </button>
+    </section>
+
+    <section id="exp-7">
+      <h2>7 · Той самий обробник двічі</h2>
+      <button type="button">Лічильник</button>
+    </section>
+
+    <section id="exp-8">
+      <h2>8 · div чи button</h2>
+      <div class="fake">Div з обробником</div>
+      <button type="button">Справжня кнопка</button>
+    </section>
+
+    <section id="exp-9">
+      <h2>9 · Enter у формі</h2>
+      <form>
+        <label>Пошук <input name="q" autocomplete="off" /></label>
+        <button>Знайти</button>
+      </form>
+    </section>
+
+    <section id="exp-10">
+      <h2>10 · value і valueAsNumber</h2>
+      <label>Число <input type="number" /></label>
+    </section>
+
+    <section id="exp-11">
+      <h2>11 · setCustomValidity</h2>
+      <label>Оцінка від 1 до 10 <input type="number" min="1" max="10" /></label>
+    </section>
+
+    <section id="exp-12">
+      <h2>12 · Подія reset</h2>
+      <form>
+        <label>Фільтр <input name="q" /></label>
+        <button type="reset">Скинути</button>
+      </form>
+    </section>
+
+    <section id="exp-13">
+      <h2>13 · Видалення елемента з фокусом</h2>
+      <button type="button">Мене видалять</button>
+    </section>
+
+    <section id="exp-14">
+      <h2>14 · focus() і tabindex</h2>
+      <div>Звичайний div</div>
+    </section>
+
+    <section id="exp-15">
+      <h2>15 · Модальний діалог і фокус</h2>
+      <button type="button" class="opener">Відкрити діалог</button>
+      <button type="button" class="outside">Кнопка поза діалогом</button>
+      <dialog>
+        <p>Модальний діалог</p>
+        <button type="button">Кнопка в діалозі</button>
+      </dialog>
+    </section>
+  </body>
+</html>

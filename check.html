@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Самоперевірка — Мій список</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="check/check.css" />
+    <script type="module" src="check/main.js"></script>
+  </head>
+  <body>
+    <header class="intro">
+      <h1>Самоперевірка «Мій список»</h1>
+      <p>
+        Перевірка відкриває <code>index.html</code> у фреймі нижче й працює із застосунком як
+        користувач: клікає, вводить текст, надсилає форми. Потім вона перевіряє, що бачить
+        користувач і що отримують допоміжні технології. Код застосунку перевірка не читає. Номер і
+        назва кожного рядка — правило з ТЗ.
+      </p>
+      <p class="intro__run">
+        <button id="run" type="button">Перевірити ще раз</button>
+        <span id="summary" role="status">Перевірка не запускалася: потрібен JavaScript.</span>
+      </p>
+      <p class="intro__note">
+        Не перемикайте вкладку, поки триває перевірка: у фоновій вкладці браузер не переводить
+        фокус, і перевірки фокусу впадуть. Справжні Esc, Tab і порядок фокусу сторінка
+        перевірити не може (синтетичні події не довірені): для них є ручний чек-лист у ТЗ.
+      </p>
+    </header>
+    <main class="layout">
+      <div id="results" class="results"></div>
+      <section class="stage-wrap" aria-labelledby="stage-title">
+        <h2 id="stage-title">Застосунок під час перевірки</h2>
+        <div id="stage" class="stage"></div>
+      </section>
+    </main>
+  </body>
+</html>

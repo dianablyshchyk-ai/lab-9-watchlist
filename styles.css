@@ -1,0 +1,331 @@
+/*
+ * Стилі «Мій список». Готові: змінювати їх для лабораторної не потрібно.
+ * Стан кнопки «До списку» показує [aria-pressed="true"], поле з помилкою — [aria-invalid="true"]:
+ * оформлення залежить від атрибутів, які встановлює ваш JavaScript.
+ *
+ * Контраст (WCAG 1.4.3), світла / темна тема, на фоні сторінки й картки: текст 15.1 / 13.8,
+ * приглушений текст 5.9 / 7.6, акцент 5.4 / 7.6, помилка 6.0 / 9.7, текст на кнопці
+ * з акцентним фоном 5.9 / 8.5 до 1.
+ */
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(#f4f5f8, #121418);
+  --surface: light-dark(#ffffff, #1c1f25);
+  --text: light-dark(#1b1f27, #e9ebef);
+  --muted: light-dark(#585f6c, #a9b0bc);
+  --line: light-dark(#d5d9e0, #363b46);
+  --accent: light-dark(#1b5ed0, #82b1ff);
+  --accent-ink: light-dark(#ffffff, #0b1426);
+  --accent-soft: light-dark(#e6eefc, #1d2a44);
+  --danger: light-dark(#b3261e, #ffb4ab);
+  --radius: 0.75rem;
+
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: var(--accent);
+}
+
+.container {
+  width: min(72rem, 100% - 2rem);
+  margin-inline: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding-block: 1rem;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.counter {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* ---------- Форми й кнопки ---------- */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+  margin-block: 1.5rem 0.5rem;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.filters .field:first-child {
+  flex: 1 1 14rem;
+}
+
+.field--check {
+  flex-direction: row;
+  align-items: center;
+  min-height: 2.75rem;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: var(--bg);
+  border: 1px solid var(--muted);
+  border-radius: 0.5rem;
+}
+
+input[type='search'],
+input[type='number'],
+select,
+textarea {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+}
+
+input[type='checkbox'] {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+textarea {
+  resize: vertical;
+}
+
+[aria-invalid='true'] {
+  border: 2px solid var(--danger);
+}
+
+.field__error {
+  margin: 0;
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.field__error:empty {
+  display: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.9rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--muted);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--accent-soft);
+}
+
+.btn--primary,
+.btn--toggle[aria-pressed='true'] {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn--primary:hover,
+.btn--toggle[aria-pressed='true']:hover {
+  background: var(--accent);
+  text-decoration: underline;
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.btn--toggle[aria-pressed='true'] .icon {
+  fill: currentColor;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Список ---------- */
+
+.results-heading {
+  margin: 1.5rem 0 0;
+  font-size: 1.25rem;
+}
+
+.status {
+  min-height: 1.5em;
+  margin: 0.25rem 0 1rem;
+  color: var(--muted);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr));
+  gap: 1rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.card p {
+  margin: 0;
+}
+
+.card__title {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.card__meta,
+.card__rating {
+  color: var(--muted);
+}
+
+.card__note {
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+
+.card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.card__actions .btn {
+  padding-inline: 0.65rem;
+}
+
+/* ---------- Діалог ---------- */
+
+.details {
+  width: min(40rem, 100% - 2rem);
+  max-height: calc(100% - 2rem);
+  padding: 1.5rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.details::backdrop {
+  background: rgb(0 0 0 / 0.55);
+}
+
+.details__title {
+  margin: 0 0 0.75rem;
+}
+
+.details__summary p {
+  margin: 0 0 0.75rem;
+}
+
+.details__source {
+  margin: 0 0 1.25rem;
+}
+
+.note-form {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.note-form__title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.note-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  padding-block: 1rem 2rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Мій список — серіали TVmaze</title>
+    <meta name="description" content="Каталог 30 серіалів TVmaze з пошуком, моїм списком і нотатками." />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="src/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <h1 class="site-title">Мій список</h1>
+        <p class="counter">У списку: <span id="watchlist-count">0</span></p>
+      </div>
+    </header>
+
+    <main class="container">
+      <form id="filters" class="filters" role="search" aria-label="Пошук серіалів">
+        <div class="field">
+          <label for="filter-query">Назва</label>
+          <input id="filter-query" name="query" type="search" autocomplete="off" spellcheck="false" />
+        </div>
+        <div class="field">
+          <label for="filter-genre">Жанр</label>
+          <select id="filter-genre" name="genre">
+            <option value="">Усі жанри</option>
+            <option>Action</option>
+            <option>Adventure</option>
+            <option>Anime</option>
+            <option>Comedy</option>
+            <option>Crime</option>
+            <option>Drama</option>
+            <option>Family</option>
+            <option>Fantasy</option>
+            <option>History</option>
+            <option>Horror</option>
+            <option>Medical</option>
+            <option>Music</option>
+            <option>Mystery</option>
+            <option>Science-Fiction</option>
+            <option>Supernatural</option>
+            <option>Thriller</option>
+            <option>War</option>
+          </select>
+        </div>
+        <div class="field field--check">
+          <input id="filter-mine" name="mine" type="checkbox" />
+          <label for="filter-mine">Лише мій список</label>
+        </div>
+        <button type="reset" class="btn">Скинути</button>
+      </form>
+
+      <h2 id="results-heading" class="results-heading">Серіали</h2>
+      <p id="status" class="status" role="status"></p>
+      <ul id="results" class="cards" aria-labelledby="results-heading"></ul>
+    </main>
+
+    <footer class="site-footer container">
+      <p>
+        Дані: <a href="https://www.tvmaze.com">TVmaze</a>, ліцензія
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Адаптовано: 30
+        серіалів із 240, лише частина полів.
+      </p>
+    </footer>
+
+    <template id="show-card">
+      <li class="card" data-id="">
+        <h3 class="card__title" data-field="name" lang="en"></h3>
+        <p class="card__meta">
+          <span data-field="year"></span> · <span data-field="genres" lang="en"></span>
+        </p>
+        <p class="card__rating">Оцінка TVmaze: <span data-field="rating"></span></p>
+        <p class="card__mine" hidden>Моя оцінка: <strong data-field="my-rating"></strong>/10</p>
+        <p class="card__note" data-field="note" hidden></p>
+        <div class="card__actions">
+          <button type="button" class="btn btn--toggle" data-action="toggle" aria-pressed="false">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M6.5 3.5h11a1 1 0 0 1 1 1v16l-6.5-4-6.5 4v-16a1 1 0 0 1 1-1z" />
+            </svg>
+            До списку<span class="visually-hidden">: <span data-field="name" lang="en"></span></span>
+          </button>
+          <button type="button" class="btn" data-action="details">
+            Детальніше<span class="visually-hidden"> про <span data-field="name" lang="en"></span></span>
+          </button>
+        </div>
+      </li>
+    </template>
+
+    <dialog id="details" class="details" aria-labelledby="details-title">
+      <h2 id="details-title" class="details__title" lang="en"></h2>
+      <div id="details-summary" class="details__summary" lang="en"></div>
+      <p class="details__source">
+        <a id="details-link" href="https://www.tvmaze.com">Сторінка серіалу на TVmaze</a>
+      </p>
+      <form id="note-form" class="note-form">
+        <h3 class="note-form__title">Моя оцінка й нотатка</h3>
+        <div class="field">
+          <label for="note-rating">Моя оцінка (ціле число від 1 до 10)</label>
+          <input id="note-rating" name="rating" type="number" min="1" max="10" step="1" required />
+          <p id="note-rating-error" class="field__error"></p>
+        </div>
+        <div class="field">
+          <label for="note-text">Нотатка (до 140 символів, необов'язково)</label>
+          <textarea id="note-text" name="note" rows="3" maxlength="140"></textarea>
+        </div>
+        <div class="note-form__actions">
+          <button type="submit" class="btn btn--primary">Зберегти</button>
+          <button type="button" class="btn">Скасувати</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
